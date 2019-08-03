@@ -14,5 +14,5 @@ module.exports = {
   migrationsTableName: 'migration_table',
   migrations: ['src/migration/*.ts'],
   cli: { migrationsDir: 'src/migration' },
-  entities: ['src/modules/Auth/**/entities/*.*'],
+  entities: ['src/modules/**/**/entities/*.*'],
 }
