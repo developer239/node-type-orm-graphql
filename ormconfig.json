@@ -9,6 +9,6 @@
   "synchronize": true,
   "logging": true,
   "entities": [
-    "src/entity/*.*"
+    "src/modules/Auth/**/entities/*.*"
   ]
 }

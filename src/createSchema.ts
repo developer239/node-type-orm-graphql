@@ -10,5 +10,5 @@ class HelloResolver {
 
 export const createSchema = () =>
   buildSchema({
-    resolvers: [HelloResolver, `${__dirname}/resolver/*/*.ts`],
+    resolvers: [HelloResolver, `${__dirname}/modules/*/resolvers/*/*.ts`],
   })
