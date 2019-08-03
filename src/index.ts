@@ -2,8 +2,8 @@ import 'reflect-metadata'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import * as bodyParser from 'body-parser'
-import { createConnection } from 'typeorm'
 import { createSchema } from '~/createSchema'
+import { createConnection } from '~/dbConnection'
 
 const app = express()
 

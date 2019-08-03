@@ -1,10 +1,10 @@
 import { Connection } from 'typeorm'
-import { createTestConnection } from './testConnection'
+import { createConnection } from '~/dbConnection'
 
 let connection: Connection
 
 beforeAll(async () => {
-  connection = await createTestConnection()
+  connection = await createConnection()
 })
 
 afterAll(async () => {

@@ -4,11 +4,24 @@ import { config as configDotenv } from 'dotenv'
 /* istanbul ignore next */
 const nodeEnv = process.env.NODE_ENV || 'development'
 
+const isTestEnv = process.env.NODE_ENV === 'test'
+
 configDotenv({
   path: resolve(process.cwd(), `.env.${nodeEnv}`),
 })
 
 const config = {
+  database: {
+    postgres: {
+      port: process.env.DATABASE_PORT,
+      host: process.env.DATABASE_HOST!,
+      databaseName: process.env.POSTGRES_DB!,
+      password: process.env.POSTGRES_PASSWORD!,
+      username: process.env.POSTGRES_USER!,
+      synchronize: isTestEnv,
+      dropSchema: isTestEnv,
+    },
+  },
   auth: {
     accessTokenSecret: process.env.AUTH_SECRET || 'developmentAuthSecret',
     refreshTokenSecret: process.env.AUTH_SECRET || 'developmentAuthSecret',
