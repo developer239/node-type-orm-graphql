@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:11.10.1-stretch
+        environment:
+          DATABASE_HOST: localhost
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secretPassword
+          POSTGRES_DB: node_type_orm_graphql
+      - image: circleci/postgres:10.2-alpine-ram
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secretPassword
+          POSTGRES_DB: node_type_orm_graphql
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: apt-get Update And Installs
+          command: |
+            sudo apt-get update
+            sudo apt-get install postgresql-client
+      - run:
+          name: Setup Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Run Database Migrations
+          command: npm run typeorm:migration:run
