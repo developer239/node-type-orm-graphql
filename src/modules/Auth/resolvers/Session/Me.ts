@@ -4,7 +4,7 @@ import { IAppContext } from '~/types'
 import { isAuth } from '~/modules/Auth/middlewares/isAuth'
 
 @Resolver()
-export class MeResolver {
+export class Me {
   @UseMiddleware(isAuth)
   @Query(() => User, { nullable: true })
   me(@Ctx() ctx: IAppContext): Promise<User> {

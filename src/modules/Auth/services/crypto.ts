@@ -10,7 +10,11 @@ const jwtVerify = util.promisify(jwt.verify) as any
 export const crypto = {
   generateAccessToken(userId: number) {
     const payload = { userId }
-    return jwtSign(payload, config.auth.secret, config.auth.createOptions)
+    return jwtSign(payload, config.auth.accessTokenSecret, config.auth.createOptions)
+  },
+  generateRefreshToken(userId: number) {
+    const payload = { userId }
+    return jwtSign(payload, config.auth.refreshTokenSecret, config.auth.createOptions)
   },
   hashPassword(password: string) {
     return bcrypt.hash(password, 12)
@@ -21,7 +25,11 @@ export const crypto = {
   async verifyAccessToken(accessToken: string) {
     try {
       // Don't return directly for catch block to work properly
-      const data = await jwtVerify(accessToken, config.auth.secret, config.auth.verifyOptions)
+      const data = await jwtVerify(
+        accessToken,
+        config.auth.accessTokenSecret,
+        config.auth.verifyOptions
+      )
       return data
     } catch (err) {
       if (err instanceof jwt.JsonWebTokenError || err instanceof SyntaxError) {

@@ -10,7 +10,8 @@ configDotenv({
 
 const config = {
   auth: {
-    secret: process.env.AUTH_SECRET || 'developmentAuthSecret',
+    accessTokenSecret: process.env.AUTH_SECRET || 'developmentAuthSecret',
+    refreshTokenSecret: process.env.AUTH_SECRET || 'developmentAuthSecret',
     createOptions: {
       expiresIn: 60 * 60,
       algorithm: 'HS256',
