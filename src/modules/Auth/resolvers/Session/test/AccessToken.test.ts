@@ -25,14 +25,14 @@ describe('[resolver] AccessToken', () => {
 
   it('should handle valid refresh token', async () => {
     const user = await createUser()
-    const dbUser = await user.save()
+    await user.save()
 
-    const refreshToken = await createRefreshToken(dbUser)
+    const refreshToken = await createRefreshToken(user)
     await refreshToken.save()
 
     const response = await requestAccessToken({
       refreshToken: refreshToken.token,
-      userId: dbUser.id,
+      userId: user.id,
     })
 
     expect(response.errors).toBeUndefined()

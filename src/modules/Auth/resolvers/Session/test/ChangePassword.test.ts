@@ -37,26 +37,26 @@ describe('[resolver] ChangePassword', () => {
 
   it('should handle valid reset password token', async () => {
     const user = await createUser()
-    const dbUser = await user.save()
+    await user.save()
 
     const expiresAt = DateTime.local().plus({ minutes: 20 })
 
-    const resetPasswordToken = await createResetPasswordToken(dbUser, {
+    const resetPasswordToken = await createResetPasswordToken(user, {
       expires: expiresAt.toJSDate(),
     })
-    const dbResetPasswordToken = await resetPasswordToken.save()
+    await resetPasswordToken.save()
 
     const response = await requestChangePassword({
-      token: dbResetPasswordToken.token,
+      token: resetPasswordToken.token,
       password: newPassword,
     })
 
     expect(response.errors).toBeUndefined()
     expect(response.data.changePassword.user).toEqual({
-      id: String(dbUser.id),
-      email: dbUser.email,
-      firstName: dbUser.firstName,
-      lastName: dbUser.lastName,
+      id: String(user.id),
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
     })
     expect(response.data.changePassword.accessToken).toBeString()
     expect(response.data.changePassword.refreshToken).toBeString()
@@ -64,17 +64,17 @@ describe('[resolver] ChangePassword', () => {
 
   it('should handle expired reset password token', async () => {
     const user = await createUser()
-    const dbUser = await user.save()
+    await user.save()
 
     const expiresAt = DateTime.local().minus({ minutes: 20 })
 
-    const resetPasswordToken = await createResetPasswordToken(dbUser, {
+    const resetPasswordToken = await createResetPasswordToken(user, {
       expires: expiresAt.toJSDate(),
     })
-    const dbResetPasswordToken = await resetPasswordToken.save()
+    await resetPasswordToken.save()
 
     const response = await requestChangePassword({
-      token: dbResetPasswordToken.token,
+      token: resetPasswordToken.token,
       password: newPassword,
     })
 

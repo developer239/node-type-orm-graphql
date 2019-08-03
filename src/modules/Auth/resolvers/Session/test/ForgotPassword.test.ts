@@ -23,9 +23,9 @@ describe('[resolver] Me', () => {
 
   it('should handle valid email', async () => {
     const user = await createUser()
-    const dbUser = await user.save()
+    await user.save()
 
-    const refreshToken = await createResetPasswordToken(dbUser)
+    const refreshToken = await createResetPasswordToken(user)
     await refreshToken.save()
 
     const response = await requestForgotPassword({ email: user.email })
