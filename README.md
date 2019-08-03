@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/developer239/node-type-orm-graphql.svg?style=svg)](https://circleci.com/gh/developer239/node-type-orm-graphql)
+
 # Node Type ORM GraphQL
 
 ## Development
