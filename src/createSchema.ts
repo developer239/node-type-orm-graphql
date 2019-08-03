@@ -1,14 +1,6 @@
-import { buildSchema, Query, Resolver } from 'type-graphql'
-
-@Resolver()
-class HelloResolver {
-  @Query(() => String)
-  async helloWorld() {
-    return 'Hello World!'
-  }
-}
+import { buildSchema } from 'type-graphql'
 
 export const createSchema = () =>
   buildSchema({
-    resolvers: [HelloResolver, `${__dirname}/modules/*/resolvers/*/*.ts`],
+    resolvers: [`${__dirname}/modules/*/resolvers/*/*.ts`],
   })

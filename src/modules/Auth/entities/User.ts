@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
 import { ObjectType, Field, ID } from 'type-graphql'
+import { crypto } from '~/modules/Auth/services/crypto'
 
 @ObjectType()
 @Entity()
@@ -22,4 +23,9 @@ export class User extends BaseEntity {
 
   @Column()
   password: string
+
+  @Field(() => String)
+  accessToken(): string {
+    return crypto.generateAccessToken(this.id)
+  }
 }
