@@ -1,4 +1,6 @@
 [![CircleCI](https://circleci.com/gh/developer239/node-type-orm-graphql.svg?style=svg)](https://circleci.com/gh/developer239/node-type-orm-graphql)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e6b658d5806762b959ca/test_coverage)](https://codeclimate.com/github/developer239/node-type-orm-graphql/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e6b658d5806762b959ca/maintainability)](https://codeclimate.com/github/developer239/node-type-orm-graphql/maintainability)
 
 # Node Type ORM GraphQL
 
