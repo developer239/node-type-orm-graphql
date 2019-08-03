@@ -12,7 +12,7 @@
     "watch": "nodemon",
     "format": "prettier --write '*/**/*.{ts,md,json}'",
     "lint:ts": "eslint 'src/**/*.ts'",
-    "test": "jest"
+    "test": "jest -i"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

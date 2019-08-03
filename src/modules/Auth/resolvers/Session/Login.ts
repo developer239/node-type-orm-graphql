@@ -5,18 +5,18 @@ import { Session } from '~/modules/Auth/entities/Session'
 
 @Resolver()
 export class LoginResolver {
-  @Mutation(() => Session, { nullable: true })
+  @Mutation(() => Session)
   async login(@Arg('email') email: string, @Arg('password') password: string): Promise<Session> {
     const user = await User.findOne({ where: { email } })
 
     if (!user) {
-      return null
+      throw Error('Invalid credentials')
     }
 
     const valid = await crypto.comparePasswords(password, user.password)
 
     if (!valid) {
-      return null
+      throw Error('Invalid credentials')
     }
 
     return {

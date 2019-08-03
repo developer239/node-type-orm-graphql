@@ -13,19 +13,19 @@ const meQuery = `
   }
 `
 
-describe('[resolver] Me', () => {
-  const requestMe = (jwtToken?: string) =>
-    gCall({
-      source: meQuery,
-      contextValue: {
-        req: {
-          headers: {
-            ...(jwtToken && { authorization: `Bearer ${jwtToken}` }),
-          },
+const requestMe = (jwtToken?: string) =>
+  gCall({
+    source: meQuery,
+    contextValue: {
+      req: {
+        headers: {
+          ...(jwtToken && { authorization: `Bearer ${jwtToken}` }),
         },
       },
-    })
+    },
+  })
 
+describe('[resolver] Me', () => {
   it('should not return anything', async () => {
     const response = await requestMe()
 
