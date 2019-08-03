@@ -10,7 +10,10 @@ export class AccessTokenResolver {
     @Arg('refreshToken') refreshToken: string,
     @Arg('userId') userId: number
   ): Promise<User> {
-    const token = await RefreshToken.findOne({ token: refreshToken, user: { id: userId } })
+    const token = await RefreshToken.findOne(
+      { token: refreshToken, user: { id: userId } },
+      { relations: ['user'] }
+    )
 
     if (!token) {
       throw Error('invalid refresh token')

@@ -16,7 +16,7 @@ export const crypto = {
   },
   async generateRefreshToken(user: User) {
     const payload = { userId: user.id }
-    const token: string = jwtSign(
+    const token: string = await jwtSign(
       payload,
       config.auth.refreshTokenSecret,
       config.auth.createOptions

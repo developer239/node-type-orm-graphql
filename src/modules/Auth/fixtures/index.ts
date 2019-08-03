@@ -28,8 +28,9 @@ export interface IDefaultRefreshToken {
   token: string
 }
 
-export const createRefreshToken = (data?: IDefaultRefreshToken) => {
+export const createRefreshToken = (user: User, data?: IDefaultRefreshToken) => {
   const refreshToken = new RefreshToken()
+  refreshToken.user = user
   refreshToken.token = R.prop('token')(data) || faker.random.uuid()
 
   return refreshToken
