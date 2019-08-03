@@ -41,8 +41,9 @@ export interface IDefaultResetPasswordToken {
   expires: string
 }
 
-export const createResetPasswordToken = (data?: IDefaultResetPasswordToken) => {
+export const createResetPasswordToken = (user: User, data?: IDefaultResetPasswordToken) => {
   const resetPasswordToken = new ResetPasswordToken()
+  resetPasswordToken.user = user
   resetPasswordToken.token = R.prop('token')(data) || faker.random.uuid()
   resetPasswordToken.expires = data ? new Date(data.expires) : new Date()
 
