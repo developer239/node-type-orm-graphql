@@ -12,7 +12,8 @@ module.exports = {
     'node_modules',
     'src',
   ],
-  'moduleNameMapper': {
+  moduleNameMapper: {
     '^~/(.*)$': '<rootDir>/src/$1',
   },
+  coverageReporters: ['json', 'lcov', 'text'],
 }

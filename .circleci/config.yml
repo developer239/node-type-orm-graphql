@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: circleci/node:11.10.1-stretch
         environment:
+          NODE_ENV: circleci
           DATABASE_HOST: localhost
           POSTGRES_USER: root
           POSTGRES_PASSWORD: secretPassword
@@ -44,5 +45,5 @@ jobs:
           name: Run Test and Coverage
           command: |
             ./cc-test-reporter before-build
-            npm test -- --coverage
+            npm run test:coverage
             ./cc-test-reporter after-build --exit-code $?

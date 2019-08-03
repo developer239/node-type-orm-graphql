@@ -7,10 +7,17 @@ const tableNames = entities.map(entity => `"${entity}"`).join(',')
 let connection: Connection
 
 beforeAll(async () => {
-  connection = await createConnection()
+  try {
+    connection = await createConnection()
+  } catch (e) {
+    console.log('[error] database connection error', e)
+  }
+})
+
+afterEach(async () => {
+  await connection.query(`TRUNCATE TABLE ${tableNames} RESTART IDENTITY CASCADE;`)
 })
 
 afterAll(async () => {
-  await connection.query(`TRUNCATE TABLE ${tableNames} RESTART IDENTITY CASCADE;`)
   await connection.close()
 })
