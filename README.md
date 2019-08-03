@@ -6,24 +6,29 @@ System Dependencies:
 
 1. `brew install node`
 2. `brew install yarn`
-3. `brew install docker`
-4. `brew install docker-compose`
+3. `brew install make`
+4. `brew install docker`
+5. `brew install docker-compose`
+
+Run docker database:
+
+1. `make infra`
+2. `make db-run-migration`
 
 Run node server:
 
-1. `yarn install`
-2. `yarn watch`
+1. `make node_modules`
+2. `make watch`
 
 Now you can open [http://localhost:3000/graphql](http://localhost:3000/graphql) in your browser.
 
 ### Helpful Commands
 
-- `yarn watch` run development server
-- `yarn format` fix prettier errors
-- `yarn lint:ts` fix eslint errors
-- `yarn test` run jest tests
-- `yarn type-check` check for typescript errors
-- `yarn type-check:watch` run type-check watcher
-- `yarn build` build project files
-- `yarn build:types` build typescript files
-- `yarn build:js` build javascript files
+- `db-generate-migration name=migration_name` create database migration
+- `db-run-migration` apply database migration
+- `make db-revert` revert last database migration
+- `make db-reset` revert migration and apply it again
+- `make test` run tests
+- `make test-coverage` run tests and report coverage
+- `make lint-ts` run eslint on typescript files
+- `make prettier` format source code by prettier
