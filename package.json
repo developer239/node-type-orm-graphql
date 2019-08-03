@@ -14,7 +14,9 @@
     "lint:ts": "eslint 'src/**/*.ts'",
     "test": "jest -i",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm",
-    "typeorm:migration:generate": "npm run typeorm -- migration:generate"
+    "typeorm:migration:generate": "npm run typeorm -- migration:generate",
+    "typeorm:migration:run": "npm run typeorm -- migration:run",
+    "typeorm:migration:revert": "npm run typeorm -- migration:revert"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -55,6 +57,7 @@
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
     "type-graphql": "^0.17.4",
     "typescript": "^3.5.3"
   },
