@@ -5,6 +5,7 @@ import {
   BaseEntity,
   BeforeInsert,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm'
 import { ObjectType, Field, ID } from 'type-graphql'
 import slugify from 'slugify'
@@ -40,7 +41,13 @@ export class Page extends BaseEntity {
   @ManyToOne(() => User, user => user.pageConnection, {
     onDelete: 'CASCADE',
   })
-  user: User
+  @JoinColumn({ name: 'userId' })
+  userConnection: User
+
+  @Field(() => User)
+  user(): Promise<User> {
+    return User.findOne({ id: this.userConnection.id })
+  }
 
   @BeforeInsert()
   buildUri() {

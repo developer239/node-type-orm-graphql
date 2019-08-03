@@ -16,7 +16,7 @@ export const createResolver = <IInputType extends ClassType>(
         return entity
           .create({
             ...data,
-            user: { id: ctx.req.session.userId },
+            userConnection: { id: ctx.req.session.userId },
           })
           .save()
       }
