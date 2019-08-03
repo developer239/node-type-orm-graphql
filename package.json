@@ -12,7 +12,9 @@
     "watch": "nodemon",
     "format": "prettier --write '*/**/*.{ts,md,json}'",
     "lint:ts": "eslint 'src/**/*.ts'",
-    "test": "jest -i"
+    "test": "jest -i",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm",
+    "typeorm:migration:generate": "npm run typeorm -- migration:generate"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
