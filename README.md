@@ -22,7 +22,7 @@ Run node server:
 1. `make node_modules`
 2. `make watch`
 
-Now you can open [http://localhost:3000/graphql](http://localhost:3000/graphql) in your browser.
+Now you can open [http://localhost:8080/graphql](http://localhost:8080/graphql) in your browser.
 
 ### Helpful Commands
 

@@ -4,6 +4,7 @@ import { ApolloServer } from 'apollo-server-express'
 import * as bodyParser from 'body-parser'
 import { createSchema } from '~/createSchema'
 import { createConnection } from '~/dbConnection'
+import config from '~/config'
 
 const app = express()
 
@@ -19,7 +20,7 @@ const main = async () => {
 
   apolloServer.applyMiddleware({ app })
 
-  app.listen(3000, () => {
+  app.listen(config.server.port, () => {
     console.log('Started server on port 3000')
   })
 }

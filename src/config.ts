@@ -11,6 +11,9 @@ configDotenv({
 })
 
 const config = {
+  server: {
+    port: parseInt(process.env.PORT!, 10) || 8080,
+  },
   database: {
     postgres: {
       port: process.env.DATABASE_PORT,
