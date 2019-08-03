@@ -1,11 +1,11 @@
-import { Resolver, Arg, Mutation } from 'type-graphql'
+import { Resolver, Arg, Query } from 'type-graphql'
 import { User } from '~/modules/Auth/entities/User'
 import { RefreshToken } from '~/modules/Auth/entities/RefreshToken'
 import { crypto } from '~/modules/Auth/services/crypto'
 
 @Resolver()
 export class AccessTokenResolver {
-  @Mutation(() => String)
+  @Query(() => String)
   async accessToken(
     @Arg('refreshToken') refreshToken: string,
     @Arg('userId') userId: number

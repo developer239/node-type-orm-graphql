@@ -2,7 +2,7 @@ import { createRefreshToken, createUser } from '~/modules/Auth/fixtures'
 import { gCall } from '~/test-utils/gCall'
 
 const accessTokenQuery = `
-  mutation RefreshToken($userId: Float!, $refreshToken: String!) {
+  query AccessToken($userId: Float!, $refreshToken: String!) {
     accessToken(userId: $userId, refreshToken: $refreshToken)
   }
 `

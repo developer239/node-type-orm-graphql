@@ -26,7 +26,7 @@ export class User extends BaseEntity {
   password: string
 
   @OneToMany(() => RefreshToken, refreshToken => refreshToken.user)
-  refreshToken: Promise<RefreshToken[]>
+  refreshTokens: Promise<RefreshToken[]>
 
   @OneToMany(() => Page, page => page.user)
   pageConnection: Promise<Page[]>

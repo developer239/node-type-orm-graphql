@@ -13,7 +13,7 @@ export class RefreshToken extends BaseEntity {
   @Column()
   token: string
 
-  @ManyToOne(() => User, user => user.refreshToken, {
+  @ManyToOne(() => User, user => user.refreshTokens, {
     onDelete: 'CASCADE',
   })
   user: User
