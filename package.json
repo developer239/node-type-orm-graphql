@@ -1,0 +1,13 @@
+{
+  "name": "node-type-orm-graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node lib/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.3"
+  }
+}
