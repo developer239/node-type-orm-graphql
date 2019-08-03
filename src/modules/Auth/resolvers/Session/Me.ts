@@ -9,7 +9,7 @@ export class Me {
   @Query(() => User, { nullable: true })
   me(@Ctx() ctx: IAppContext): Promise<User> {
     if (!ctx.req.session && ctx.req.session.userId) {
-      return undefined
+      return null
     }
 
     return User.findOne(ctx.req.session.userId)
