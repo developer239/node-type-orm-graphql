@@ -2,6 +2,8 @@
 
 # Node Type ORM GraphQL
 
+Demo application [is running here](https://node-type-orm-graphql.herokuapp.com/graphql) (it might take a while before the free server wakes up)
+
 ## Development
 
 System Dependencies:
