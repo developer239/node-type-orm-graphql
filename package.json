@@ -17,7 +17,9 @@
     "typeorm": "yarn build:js && ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm",
     "typeorm:migration:generate": "npm run typeorm -- migration:generate",
     "typeorm:migration:run": "npm run typeorm -- migration:run",
-    "typeorm:migration:revert": "npm run typeorm -- migration:revert"
+    "typeorm:migration:revert": "npm run typeorm -- migration:revert",
+    "heroku-postbuild": "npm run build:js && npm run typeorm:migration:run",
+    "prod": "node lib"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
