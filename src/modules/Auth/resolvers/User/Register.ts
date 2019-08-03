@@ -2,11 +2,12 @@ import { Resolver, Mutation, Arg } from 'type-graphql'
 import { User } from '~/modules/Auth/entities/User'
 import { RegisterInput } from '~/modules/Auth/inputs/Register'
 import { crypto } from '~/modules/Auth/services/crypto'
+import { Session } from '~/modules/Auth/entities/Session'
 
 @Resolver()
 export class RegisterResolver {
-  @Mutation(() => User)
-  async register(@Arg('data') data: RegisterInput): Promise<User> {
+  @Mutation(() => Session)
+  async register(@Arg('data') data: RegisterInput): Promise<Session> {
     const hashedPassword = await crypto.hashPassword(data.password)
 
     const user = await User.create({
@@ -18,6 +19,10 @@ export class RegisterResolver {
 
     await user.save()
 
-    return user
+    return {
+      user,
+      accessToken: crypto.generateAccessToken(user),
+      refreshToken: await crypto.generateRefreshToken(user),
+    }
   }
 }

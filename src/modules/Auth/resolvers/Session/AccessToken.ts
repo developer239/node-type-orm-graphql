@@ -4,9 +4,9 @@ import { RefreshToken } from '~/modules/Auth/entities/RefreshToken'
 import { crypto } from '~/modules/Auth/services/crypto'
 
 @Resolver()
-export class TokenResolver {
+export class AccessTokenResolver {
   @Mutation(() => String)
-  async token(
+  async accessToken(
     @Arg('refreshToken') refreshToken: string,
     @Arg('userId') userId: number
   ): Promise<User> {
@@ -16,6 +16,6 @@ export class TokenResolver {
       throw Error('invalid refresh token')
     }
 
-    return crypto.generateAccessToken(userId)
+    return crypto.generateAccessToken(token.user)
   }
 }

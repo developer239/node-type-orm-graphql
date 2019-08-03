@@ -2,6 +2,8 @@ import * as R from 'ramda'
 import faker from 'faker'
 import { User } from '~/modules/Auth/entities/User'
 import { crypto } from '~/modules/Auth/services/crypto'
+import { RefreshToken } from '~/modules/Auth/entities/RefreshToken'
+import { ResetPasswordToken } from '~/modules/Auth/entities/ResetPasswordToken'
 
 export interface IDefaultUserData {
   firstName: string
@@ -20,4 +22,28 @@ export const createUser = async (data?: IDefaultUserData) => {
   user.password = R.prop('password')(data) || (await crypto.hashPassword(FAKE_PASSWORD))
 
   return user
+}
+
+export interface IDefaultRefreshToken {
+  token: string
+}
+
+export const createRefreshToken = (data?: IDefaultRefreshToken) => {
+  const refreshToken = new RefreshToken()
+  refreshToken.token = R.prop('token')(data) || faker.random.uuid()
+
+  return refreshToken
+}
+
+export interface IDefaultResetPasswordToken {
+  token: string
+  expires: string
+}
+
+export const createResetPasswordToken = (data?: IDefaultResetPasswordToken) => {
+  const resetPasswordToken = new ResetPasswordToken()
+  resetPasswordToken.token = R.prop('token')(data) || faker.random.uuid()
+  resetPasswordToken.expires = data ? new Date(data.expires) : new Date()
+
+  return resetPasswordToken
 }

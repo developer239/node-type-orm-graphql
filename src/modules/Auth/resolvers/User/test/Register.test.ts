@@ -6,10 +6,14 @@ const registerMutation = `
     register(
       data: $data
     ) {
-      id
-      email
-      firstName
-      lastName
+      user {
+        id
+        email
+        firstName
+        lastName
+      }
+      accessToken
+      refreshToken
     }
   }
 `
@@ -25,15 +29,13 @@ describe('[resolver] Register', () => {
       },
     })
 
-    expect(response.errors).toEqual(undefined)
-    expect(response).toMatchObject({
-      data: {
-        register: {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-        },
-      },
+    expect(response.errors).toBeUndefined()
+    expect(response.data.register.accessToken).toBeString()
+    expect(response.data.register.refreshToken).toBeString()
+    expect(response.data.register.user).toMatchObject({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
     })
   })
 })

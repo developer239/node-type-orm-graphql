@@ -5,11 +5,12 @@ import { User } from '~/modules/Auth/entities/User'
 import { ChangePasswordInput } from '~/modules/Auth/inputs/ChangePassword'
 import { ResetPasswordToken } from '~/modules/Auth/entities/ResetPasswordToken'
 import { crypto } from '~/modules/Auth/services/crypto'
+import { Session } from '~/modules/Auth/entities/Session'
 
 @Resolver()
 export class ChangePasswordResolver {
-  @Mutation(() => User, { nullable: true })
-  async changePassword(@Arg('data') data: ChangePasswordInput): Promise<User | null> {
+  @Mutation(() => Session, { nullable: true })
+  async changePassword(@Arg('data') data: ChangePasswordInput): Promise<Session | null> {
     const resetPasswordToken = await ResetPasswordToken.findOne({
       where: { token: data.token },
       relations: ['user'],
@@ -36,6 +37,12 @@ export class ChangePasswordResolver {
 
     await resetPasswordToken.remove()
 
-    return resetPasswordToken.user
+    const user = resetPasswordToken.user
+
+    return {
+      user,
+      accessToken: crypto.generateAccessToken(user),
+      refreshToken: await crypto.generateRefreshToken(user),
+    }
   }
 }

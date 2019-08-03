@@ -2,19 +2,30 @@ import util from 'util'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import config from '~/config'
+import { RefreshToken } from '~/modules/Auth/entities/RefreshToken'
+import { User } from '~/modules/Auth/entities/User'
 
 const jwtSign = util.promisify(jwt.sign) as any
 
 const jwtVerify = util.promisify(jwt.verify) as any
 
 export const crypto = {
-  generateAccessToken(userId: number) {
-    const payload = { userId }
+  generateAccessToken(user: User) {
+    const payload = { userId: user.id }
     return jwtSign(payload, config.auth.accessTokenSecret, config.auth.createOptions)
   },
-  generateRefreshToken(userId: number) {
-    const payload = { userId }
-    return jwtSign(payload, config.auth.refreshTokenSecret, config.auth.createOptions)
+  async generateRefreshToken(user: User) {
+    const payload = { userId: user.id }
+    const token: string = jwtSign(
+      payload,
+      config.auth.refreshTokenSecret,
+      config.auth.createOptions
+    )
+
+    const refreshToken = RefreshToken.create({ user, token })
+    await refreshToken.save()
+
+    return token
   },
   hashPassword(password: string) {
     return bcrypt.hash(password, 12)
