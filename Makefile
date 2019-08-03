@@ -16,15 +16,15 @@ watch:
 	$(call log, "Starting dev server")
 	yarn watch
 
-db-generate-migration: build-js
+db-generate-migration:
 	$(call log, "Creating migration")
 	yarn typeorm:migration:generate -- -n ${name}
 
-db-run-migration: build-js
+db-run-migration:
 	$(call log, "Database migration")
 	yarn typeorm:migration:run
 
-db-revert: build-js
+db-revert:
 	$(call log, "Database rollback")
 	yarn typeorm:migration:revert
 

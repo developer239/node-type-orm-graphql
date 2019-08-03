@@ -14,7 +14,7 @@
     "lint:ts": "eslint 'src/**/*.ts'",
     "test": "jest -i",
     "test:coverage": "jest -i --coverage",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm",
+    "typeorm": "yarn build:js && ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm",
     "typeorm:migration:generate": "npm run typeorm -- migration:generate",
     "typeorm:migration:run": "npm run typeorm -- migration:run",
     "typeorm:migration:revert": "npm run typeorm -- migration:revert"
