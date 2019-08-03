@@ -1,5 +1,6 @@
 import * as R from 'ramda'
 import faker from 'faker'
+import { DateTime } from 'luxon'
 import { User } from '~/modules/Auth/entities/User'
 import { crypto } from '~/modules/Auth/services/crypto'
 import { RefreshToken } from '~/modules/Auth/entities/RefreshToken'
@@ -37,15 +38,15 @@ export const createRefreshToken = (user: User, data?: IDefaultRefreshToken) => {
 }
 
 export interface IDefaultResetPasswordToken {
-  token: string
-  expires: string
+  token?: string
+  expires?: Date
 }
 
 export const createResetPasswordToken = (user: User, data?: IDefaultResetPasswordToken) => {
   const resetPasswordToken = new ResetPasswordToken()
   resetPasswordToken.user = user
-  resetPasswordToken.token = R.prop('token')(data) || faker.random.uuid()
-  resetPasswordToken.expires = data ? new Date(data.expires) : new Date()
+  resetPasswordToken.token = (R.path(['token'])(data) as string) || faker.random.uuid()
+  resetPasswordToken.expires = data ? data.expires : DateTime.local().toJSDate()
 
   return resetPasswordToken
 }
