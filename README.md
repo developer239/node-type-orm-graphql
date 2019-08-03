@@ -24,8 +24,8 @@ Now you can open [http://localhost:3000/graphql](http://localhost:3000/graphql) 
 
 ### Helpful Commands
 
-- `db-generate-migration name=migration_name` create database migration
-- `db-run-migration` apply database migration
+- `make db-generate-migration name=migration_name` create database migration
+- `make db-run-migration` apply database migration
 - `make db-revert` revert last database migration
 - `make db-reset` revert migration and apply it again
 - `make test` run tests
