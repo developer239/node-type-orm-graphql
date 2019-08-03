@@ -7,8 +7,11 @@
     "moduleResolution": "node",
     "allowJs": false,
     "noEmit": true,
-    "strict": true,
     "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "strict": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "baseUrl": ".",
     "rootDirs": [
       "node_modules",
