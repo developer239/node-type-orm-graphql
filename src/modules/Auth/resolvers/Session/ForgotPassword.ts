@@ -1,15 +1,17 @@
 import { DateTime } from 'luxon'
 import { Resolver, Mutation, Arg } from 'type-graphql'
+import { getCustomRepository } from 'typeorm'
 import { v4 } from 'uuid'
-import { User } from '~/modules/Auth/entities/User'
 import { ResetPasswordToken } from '~/modules/Auth/entities/ResetPasswordToken'
 import { sendEmail } from '~/modules/Core/services/mailer'
+import { UserRepository } from '~/modules/Auth/repositories/UserRepository'
 
 @Resolver()
 export class ForgotPasswordResolver {
   @Mutation(() => Boolean)
   async forgotPassword(@Arg('email') email: string): Promise<boolean> {
-    const user = await User.findOne({ email })
+    const userRepository = getCustomRepository(UserRepository)
+    const user = await userRepository.findByEmail(email)
 
     if (!user) {
       return false

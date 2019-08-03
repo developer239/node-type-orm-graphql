@@ -4,12 +4,15 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator'
-import { User } from '~/modules/Auth/entities/User'
+import { getCustomRepository } from 'typeorm'
+import { UserRepository } from '~/modules/Auth/repositories/UserRepository'
 
 @ValidatorConstraint({ async: true })
 export class IsEmailAlreadyExistConstraint implements ValidatorConstraintInterface {
   async validate(email: string) {
-    const user = await User.findOne({ where: { email } })
+    const userRepository = getCustomRepository(UserRepository)
+    const user = await userRepository.findByEmail(email)
+
     return !user
   }
 }
