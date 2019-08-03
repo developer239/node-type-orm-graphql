@@ -16,6 +16,8 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema: await createSchema(),
     context: ({ req }: any) => ({ req }),
+    introspection: true,
+    playground: true,
   })
 
   apolloServer.applyMiddleware({ app })
