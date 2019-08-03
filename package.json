@@ -7,7 +7,7 @@
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
     "build": "npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:types": "tsc --emitDeclarationOnly --noEmit false -d",
     "build:js": "babel src --out-dir lib --extensions '.ts' --source-maps inline",
     "watch": "nodemon",
     "format": "prettier --write '*/**/*.{ts,md,json}'",
