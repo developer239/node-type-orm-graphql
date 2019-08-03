@@ -12,5 +12,6 @@ export const createSchema = () =>
   buildSchema({
     resolvers: [
       HelloResolver,
+      `${__dirname}/resolver/*/*.ts`
     ],
   })
