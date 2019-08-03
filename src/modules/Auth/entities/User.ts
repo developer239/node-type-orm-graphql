@@ -31,7 +31,7 @@ export class User extends BaseEntity {
   @OneToMany(() => Page, page => page.userConnection)
   pageConnection: Promise<Page[]>
 
-  @Field(() => [Page], { nullable: true })
+  @Field(() => [Page], { nullable: true, complexity: 5 })
   async pages(): Promise<Page[] | []> {
     const pages = await Page.find({
       relations: ['userConnection'],

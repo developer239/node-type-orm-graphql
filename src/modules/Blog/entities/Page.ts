@@ -44,7 +44,7 @@ export class Page extends BaseEntity {
   @JoinColumn({ name: 'userId' })
   userConnection: User
 
-  @Field(() => User)
+  @Field(() => User, { complexity: 5 })
   user(): Promise<User> {
     return User.findOne({ relations: ['pageConnection'], where: { id: this.userConnection.id } })
   }
