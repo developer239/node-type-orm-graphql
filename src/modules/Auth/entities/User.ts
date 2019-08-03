@@ -33,7 +33,10 @@ export class User extends BaseEntity {
 
   @Field(() => [Page], { nullable: true })
   async pages(): Promise<Page[] | []> {
-    const pages = await Page.find({ userConnection: { id: this.id } })
+    const pages = await Page.find({
+      relations: ['userConnection'],
+      where: { userConnection: { id: this.id } },
+    })
 
     if (!pages) {
       return []

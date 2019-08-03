@@ -46,7 +46,7 @@ export class Page extends BaseEntity {
 
   @Field(() => User)
   user(): Promise<User> {
-    return User.findOne({ id: this.userConnection.id })
+    return User.findOne({ relations: ['pageConnection'], where: { id: this.userConnection.id } })
   }
 
   @BeforeInsert()
