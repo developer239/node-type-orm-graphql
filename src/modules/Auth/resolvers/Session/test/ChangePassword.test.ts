@@ -62,7 +62,7 @@ describe('[resolver] ChangePassword', () => {
     expect(response.data.changePassword.refreshToken).toBeString()
   })
 
-  it('should handle invalid reset password token', async () => {
+  it('should handle expired reset password token', async () => {
     const user = await createUser()
     const dbUser = await user.save()
 
