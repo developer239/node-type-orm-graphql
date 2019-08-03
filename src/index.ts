@@ -20,7 +20,7 @@ const main = async () => {
     playground: true,
   })
 
-  apolloServer.applyMiddleware({ app })
+  apolloServer.applyMiddleware({ app, cors: false })
 
   app.listen(config.server.port, () => {
     console.log('Started server on port 3000')
