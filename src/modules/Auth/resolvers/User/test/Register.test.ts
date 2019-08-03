@@ -19,7 +19,7 @@ const registerMutation = `
 `
 
 describe('[resolver] Register', () => {
-  it('should create resolver', async () => {
+  it('should register user', async () => {
     const user = await createUser()
 
     const response = await gCall({
