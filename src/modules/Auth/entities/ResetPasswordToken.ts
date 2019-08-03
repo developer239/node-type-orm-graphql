@@ -17,7 +17,9 @@ export class ResetPasswordToken extends BaseEntity {
   @Column()
   expires: Date
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: User
 }
