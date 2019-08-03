@@ -10,6 +10,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions '.ts' --source-maps inline",
     "watch": "nodemon",
+    "format": "prettier --write '*/**/*.{ts,md,json}'",
     "lint:ts": "eslint 'src/**/*.ts'"
   },
   "devDependencies": {
