@@ -1,1 +1,3 @@
-console.log('Hello from typescript!')
+import { person } from '~/common/person'
+
+console.log(`Hello ${person.name}`)
