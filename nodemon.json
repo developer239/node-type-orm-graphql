@@ -3,7 +3,8 @@
     "node_modules"
   ],
   "watch": [
-    "src"
+    "src",
+    "yarn.lock"
   ],
   "exec": "babel-node --extensions '.ts' src/index.ts",
   "ext": "ts"
