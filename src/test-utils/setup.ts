@@ -1,5 +1,6 @@
 import { Connection } from 'typeorm'
 import { createConnection } from '~/dbConnection'
+import { logger } from '~/modules/Core/services/logger'
 
 const entities = ['user']
 const tableNames = entities.map(entity => `"${entity}"`).join(',')
@@ -10,7 +11,7 @@ beforeAll(async () => {
   try {
     connection = await createConnection()
   } catch (e) {
-    console.log('[error] database connection error', e)
+    logger.error(`Couldn't connect to test database: ${e.message}.`)
   }
 })
 

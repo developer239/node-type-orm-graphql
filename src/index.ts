@@ -6,6 +6,7 @@ import { createSchema } from '~/createSchema'
 import { createConnection } from '~/dbConnection'
 import config from '~/config'
 import { createComplexityValidator } from '~/plugins/complexityValidator'
+import { logger } from '~/modules/Core/services/logger'
 
 const app = express()
 
@@ -29,7 +30,7 @@ const main = async () => {
   apolloServer.applyMiddleware({ app, cors: false })
 
   app.listen(config.server.port, () => {
-    console.log(`[info] Started server on port ${config.server.port}`)
+    logger.info(`Started server on port ${config.server.port}`)
   })
 }
 

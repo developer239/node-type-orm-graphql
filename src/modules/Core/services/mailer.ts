@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { logger } from '~/modules/Core/services/logger'
 
 export interface IMailerParams {
   from: string
@@ -30,6 +31,6 @@ export const sendEmail = async (params: IMailerParams) => {
 
   const info = await transporter.sendMail(mailOptions)
 
-  console.log(`[mailer] Message sent: ${info.messageId}`)
-  console.log(`[mailer] Preview URL: ${nodemailer.getTestMessageUrl(info)}`)
+  logger.info(`Message sent: ${info.messageId}`)
+  logger.info(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`)
 }

@@ -1,6 +1,7 @@
 import { getComplexity, simpleEstimator, fieldConfigEstimator } from 'graphql-query-complexity'
 import { GraphQLSchema, separateOperations } from 'graphql'
 import config from '~/config'
+import { logger } from '~/modules/Core/services/logger'
 
 export const createComplexityValidator = (schema: GraphQLSchema) => ({
   requestDidStart: () => ({
@@ -22,7 +23,7 @@ export const createComplexityValidator = (schema: GraphQLSchema) => ({
 
       // This condition will prevent our console from being spammed by apollo playground introspection queries
       if (request.operationName !== 'IntrospectionQuery') {
-        console.log('Used query complexity points:', complexity)
+        logger.error(`Used query complexity points: ${complexity}`)
       }
     },
   }),
