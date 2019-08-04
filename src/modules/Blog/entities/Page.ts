@@ -39,6 +39,9 @@ export class Page extends BaseEntity {
   @Column()
   uri: string
 
+  @Column()
+  userId: number
+
   @ManyToOne(() => User, user => user.pageConnection, {
     onDelete: 'CASCADE',
   })
@@ -47,7 +50,7 @@ export class Page extends BaseEntity {
 
   @Field(() => User, { complexity: 5 })
   async user(): Promise<User> {
-    const user = await findById(this.userConnection.id)
+    const user = await findById(this.userId)
 
     return user
   }
