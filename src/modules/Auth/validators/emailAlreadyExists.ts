@@ -4,12 +4,12 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator'
-import { findByEmail } from '~/modules/Auth/loaders/user'
+import { findUserByEmail } from '~/modules/Auth/loaders/user'
 
 @ValidatorConstraint({ async: true })
 export class IsEmailAlreadyExistConstraint implements ValidatorConstraintInterface {
   async validate(email: string) {
-    const user = await findByEmail(email)
+    const user = await findUserByEmail(email)
 
     return !user
   }

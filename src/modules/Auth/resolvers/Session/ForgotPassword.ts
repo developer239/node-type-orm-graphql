@@ -3,13 +3,13 @@ import { Resolver, Mutation, Arg } from 'type-graphql'
 import { v4 } from 'uuid'
 import { ResetPasswordToken } from '~/modules/Auth/entities/ResetPasswordToken'
 import { sendEmail } from '~/modules/Core/services/mailer'
-import { findByEmail } from '~/modules/Auth/loaders/user'
+import { findUserByEmail } from '~/modules/Auth/loaders/user'
 
 @Resolver()
 export class ForgotPasswordResolver {
   @Mutation(() => Boolean)
   async forgotPassword(@Arg('email') email: string): Promise<boolean> {
-    const user = await findByEmail(email)
+    const user = await findUserByEmail(email)
 
     if (!user) {
       return false
