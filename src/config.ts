@@ -8,6 +8,7 @@ configDotenv({
 })
 
 const isTestEnv = ['test', 'circleci'].includes(process.env.NODE_ENV)
+const isDevEnv = nodeEnv === 'development'
 
 const pgUrl = parse(process.env.DATABASE_URL)
 
@@ -25,6 +26,7 @@ const config = {
       databaseName: pgUrl.database,
       synchronize: isTestEnv,
       dropSchema: isTestEnv,
+      logging: isDevEnv,
     },
   },
   auth: {

@@ -12,5 +12,6 @@ export const createConnection = () =>
     database: config.database.postgres.databaseName,
     synchronize: config.database.postgres.synchronize,
     dropSchema: config.database.postgres.dropSchema,
+    logging: config.database.postgres.logging,
     entities: [`${__dirname}/modules/**/**/entities/*.*`],
   })
