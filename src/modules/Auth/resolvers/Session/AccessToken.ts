@@ -2,6 +2,7 @@ import { Resolver, Arg, Query } from 'type-graphql'
 import { User } from '~/modules/Auth/entities/User'
 import { RefreshToken } from '~/modules/Auth/entities/RefreshToken'
 import { crypto } from '~/modules/Auth/services/crypto'
+import { INVALID_TOKEN } from '~/modules/Core/errors'
 
 @Resolver()
 export class AccessTokenResolver {
@@ -16,7 +17,7 @@ export class AccessTokenResolver {
     )
 
     if (!token) {
-      throw Error('invalid refresh token')
+      throw Error(INVALID_TOKEN)
     }
 
     return crypto.generateAccessToken(token.user)

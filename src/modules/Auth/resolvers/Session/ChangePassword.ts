@@ -6,6 +6,7 @@ import { ChangePasswordInput } from '~/modules/Auth/inputs/ChangePassword'
 import { ResetPasswordToken } from '~/modules/Auth/entities/ResetPasswordToken'
 import { crypto } from '~/modules/Auth/services/crypto'
 import { Session } from '~/modules/Auth/entities/Session'
+import { TOKEN_EXPIRED } from '~/modules/Core/errors'
 
 @Resolver()
 export class ChangePasswordResolver {
@@ -25,7 +26,7 @@ export class ChangePasswordResolver {
 
     if (now.toSeconds() > expiresAt.toSeconds()) {
       await resetPasswordToken.remove()
-      throw Error('Reset password token is expired')
+      throw Error(TOKEN_EXPIRED)
     }
 
     await getConnection()
