@@ -19,8 +19,12 @@
       "value": "production"
     },
     "YARN_PRODUCTION": {
-      "description": "We want to install dev dependencies.",
+      "description": "We want to keep dev dependencies.",
       "value": "false"
+    },
+    "AUTH_SECRET": {
+      "description": "Secret key used for generating JWT tokens.",
+      "generator": "secret"
     }
   },
   "addons": [

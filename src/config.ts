@@ -2,16 +2,14 @@ import { resolve } from 'path'
 import { config as configDotenv } from 'dotenv'
 import { parse } from 'pg-connection-string'
 
-/* istanbul ignore next */
 const nodeEnv = process.env.NODE_ENV || 'development'
-
-const isTestEnv = ['test', 'circleci'].includes(process.env.NODE_ENV)
-
 configDotenv({
   path: resolve(process.cwd(), `.env.${nodeEnv}`),
 })
 
-const pgUrl = process.env.DATABASE_URL ? parse(process.env.DATABASE_URL) : undefined
+const isTestEnv = ['test', 'circleci'].includes(process.env.NODE_ENV)
+
+const pgUrl = parse(process.env.DATABASE_URL)
 
 const config = {
   server: {
@@ -20,21 +18,11 @@ const config = {
   },
   database: {
     postgres: {
-      ...(pgUrl
-        ? {
-            host: pgUrl.host,
-            port: pgUrl.port,
-            username: pgUrl.user,
-            password: pgUrl.password,
-            databaseName: pgUrl.database,
-          }
-        : {
-            host: process.env.DATABASE_HOST!,
-            port: process.env.DATABASE_PORT,
-            username: process.env.POSTGRES_USER!,
-            password: process.env.POSTGRES_PASSWORD!,
-            databaseName: process.env.POSTGRES_DB!,
-          }),
+      host: pgUrl.host,
+      port: pgUrl.port,
+      username: pgUrl.user,
+      password: pgUrl.password,
+      databaseName: pgUrl.database,
       synchronize: isTestEnv,
       dropSchema: isTestEnv,
     },
