@@ -39,10 +39,6 @@ export class ChangePasswordResolver {
 
     const user = resetPasswordToken.user
 
-    return {
-      user,
-      accessToken: crypto.generateAccessToken(user),
-      refreshToken: await crypto.generateRefreshToken(user),
-    }
+    return new Session(user)
   }
 }

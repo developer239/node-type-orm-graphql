@@ -19,10 +19,6 @@ export class RegisterResolver {
 
     await user.save()
 
-    return {
-      user,
-      accessToken: crypto.generateAccessToken(user),
-      refreshToken: await crypto.generateRefreshToken(user),
-    }
+    return new Session(user)
   }
 }

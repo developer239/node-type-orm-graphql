@@ -21,10 +21,6 @@ export class LoginResolver {
       throw Error('Invalid credentials')
     }
 
-    return {
-      user,
-      accessToken: crypto.generateAccessToken(user),
-      refreshToken: await crypto.generateRefreshToken(user),
-    }
+    return new Session(user)
   }
 }
