@@ -7,7 +7,7 @@ export const listResolver = (entity: any, middleware?: Middleware<any>[]) => {
   class BaseResolver {
     @Query(() => [entity], { name: `list${pluralize(entity.className)}` })
     @UseMiddleware(...(middleware || []))
-    create() {
+    list() {
       return entity.find()
     }
   }

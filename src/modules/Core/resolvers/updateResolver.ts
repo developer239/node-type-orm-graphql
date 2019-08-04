@@ -3,6 +3,8 @@ import { getConnection } from 'typeorm'
 import { Middleware } from 'type-graphql/dist/interfaces/Middleware'
 import { IAppContext } from '~/types'
 
+// TODO: I want to do this in one query
+// https://github.com/typeorm/typeorm/issues/2660
 export const updateResolver = <IInputType extends ClassType>(
   entity: any,
   inputType: IInputType,
@@ -12,7 +14,7 @@ export const updateResolver = <IInputType extends ClassType>(
   class BaseResolver {
     @Mutation(() => entity, { name: `update${entity.className}` })
     @UseMiddleware(...(middleware || []))
-    async create(@Arg('data', () => inputType) data: any, @Ctx() ctx: IAppContext) {
+    async update(@Arg('data', () => inputType) data: any, @Ctx() ctx: IAppContext) {
       const { id, ...newData } = data
 
       const updateResult = await getConnection()
@@ -28,8 +30,6 @@ export const updateResolver = <IInputType extends ClassType>(
         throw Error('Unauthorized')
       }
 
-      // TODO: I don't want to do separate query for this
-      // https://github.com/typeorm/typeorm/issues/2660
       return entity.findOne(updateFields.id)
     }
   }
