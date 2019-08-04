@@ -6,6 +6,8 @@
 
 Demo application [is running here](https://node-type-orm-graphql.herokuapp.com/graphql) (it might take a while before the free server wakes up)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 ## Development
 
 System Dependencies:

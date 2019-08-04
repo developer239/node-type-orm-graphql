@@ -1,0 +1,29 @@
+{
+  "name": "node-type-orm-graphql",
+  "description": "Example GraphQL Typescript Application",
+  "keywords": [
+    "node",
+    "postgres",
+    "type-orm",
+    "type-graphql",
+    "orm",
+    "graphql",
+    "typescript"
+  ],
+  "website": "https://node-type-orm-graphql.herokuapp.com/graphql",
+  "success_url": "/graphql",
+  "repository": "https://github.com/developer239/node-type-orm-graphql",
+  "env": {
+    "NODE_ENV": {
+      "description": "We want to run the app in production mode.",
+      "value": "production"
+    },
+    "YARN_PRODUCTION": {
+      "description": "We want to install dev dependencies.",
+      "value": "false"
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
