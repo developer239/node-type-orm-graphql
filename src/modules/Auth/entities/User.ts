@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 't
 import { ObjectType, Field, ID } from 'type-graphql'
 import { RefreshToken } from '~/modules/Auth/entities/RefreshToken'
 import { Page } from '~/modules/Blog/entities/Page'
-import { findPagesByUserId } from '~/modules/Blog/loaders/page'
+import { FindPagesByUserIdsLoader } from '~/modules/Blog/loaders/page'
 
 @ObjectType()
 @Entity()
@@ -34,7 +34,7 @@ export class User extends BaseEntity {
 
   @Field(() => [Page], { nullable: true, complexity: 5 })
   async pages(): Promise<Page[] | []> {
-    const pages = findPagesByUserId(this.id)
+    const pages = (FindPagesByUserIdsLoader.load(this.id) as unknown) as Page[]
 
     return pages
   }

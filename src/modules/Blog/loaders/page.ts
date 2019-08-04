@@ -1,13 +1,18 @@
+import { In } from 'typeorm'
+import * as R from 'ramda'
+import DataLoader from 'dataloader'
 import { Page } from '~/modules/Blog/entities/Page'
 
-export const findPagesByUserId = async (userId: number) => {
+export const findPagesByUserIds = async (userIds: number[]) => {
   const pages = await Page.find({
-    where: { userConnection: { id: userId } },
+    where: { userConnection: { id: In(userIds) } },
   })
 
-  if (!pages) {
-    return []
-  }
+  // @ts-ignore
+  const groupedPages = R.groupBy(R.prop('userId'))(pages)
 
-  return pages
+  // @ts-ignore
+  return R.map(R.propOr([], R.__, groupedPages))(userIds)
 }
+
+export const FindPagesByUserIdsLoader = new DataLoader(findPagesByUserIds)

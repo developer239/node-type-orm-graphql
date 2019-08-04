@@ -14,10 +14,7 @@ beforeAll(async () => {
   }
 })
 
-afterEach(async () => {
-  await connection.query(`TRUNCATE TABLE ${tableNames} RESTART IDENTITY CASCADE;`)
-})
-
 afterAll(async () => {
+  await connection.query(`TRUNCATE TABLE ${tableNames} RESTART IDENTITY CASCADE;`)
   await connection.close()
 })
