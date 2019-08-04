@@ -23,6 +23,15 @@ const main = async () => {
     playground: true,
     plugins: [createComplexityValidator(schema)],
     formatError: error => {
+      if (error.message === 'Argument Validation Error') {
+        logger.apolloValidationError(error.message, error.extensions.exception)
+        return {
+          message: error.message,
+          validationErrors: error.extensions.exception.validationErrors,
+        }
+      }
+
+      logger.apolloError(error.message, error.extensions.exception.data)
       return new Error(error.message)
     },
   })
