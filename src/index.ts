@@ -1,12 +1,14 @@
 import 'reflect-metadata'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
+import { ExpressContext } from 'apollo-server-express/src/ApolloServer'
 import * as bodyParser from 'body-parser'
 import { createSchema } from '~/createSchema'
 import { createConnection } from '~/dbConnection'
 import config from '~/config'
 import { createComplexityValidator } from '~/plugins/complexityValidator'
 import { logger } from '~/modules/Core/services/logger'
+import { formatError } from '~/modules/Core/errors/formatError'
 
 const app = express()
 
@@ -18,22 +20,11 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req }: any) => ({ req }),
+    context: ({ req }: ExpressContext) => ({ req }),
     introspection: true,
     playground: true,
     plugins: [createComplexityValidator(schema)],
-    formatError: error => {
-      if (error.message === 'Argument Validation Error') {
-        logger.apolloValidationError(error.message, error.extensions.exception)
-        return {
-          message: error.message,
-          validationErrors: error.extensions.exception.validationErrors,
-        }
-      }
-
-      logger.apolloError(error.message, error.extensions.exception.data)
-      return new Error(error.message)
-    },
+    formatError,
   })
 
   apolloServer.applyMiddleware({ app, cors: false })

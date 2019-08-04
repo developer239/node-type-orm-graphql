@@ -1,9 +1,9 @@
 import Boom from 'boom'
 
-export const unauthorizedError = (data?: any) => Boom.badData('Access denied', data)
+export const unauthorizedError = (data?: Object) => Boom.badData('Access denied', data)
 
-export const tokenExpiredError = (data?: any) => Boom.badData('Token Expired', data)
+export const tokenExpiredError = (data?: Object) => Boom.badData('Token Expired', data)
 
-export const invalidTokenError = (data?: any) => Boom.badData('Invalid Token', data)
+export const invalidTokenError = (data?: Object) => Boom.badData('Invalid Token', data)
 
-export const notFoundError = (data?: any) => Boom.badData('Not Found', data)
+export const notFoundError = (data?: Object) => Boom.badData('Not Found', data)
