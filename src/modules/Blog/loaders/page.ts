@@ -3,7 +3,7 @@ import * as R from 'ramda'
 import DataLoader from 'dataloader'
 import { Page } from '~/modules/Blog/entities/Page'
 
-export const findPagesByUserIds = async (userIds: number[]) => {
+export const pagesByUserIds = async (userIds: number[]) => {
   const pages = await Page.find({
     where: { userConnection: { id: In(userIds) } },
   })
@@ -15,4 +15,7 @@ export const findPagesByUserIds = async (userIds: number[]) => {
   return R.map(R.propOr([], R.__, groupedPages))(userIds)
 }
 
-export const PagesByUserIdsLoader = new DataLoader(findPagesByUserIds)
+export const PagesByUserIdsLoader = new DataLoader(pagesByUserIds)
+
+export const findPagesByUserId = (userId: number) =>
+  PagesByUserIdsLoader.load(userId) as Promise<Page[] | []>

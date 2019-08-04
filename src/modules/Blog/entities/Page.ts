@@ -10,7 +10,7 @@ import {
 import { ObjectType, Field, ID } from 'type-graphql'
 import slugify from 'slugify'
 import { User } from '~/modules/Auth/entities/User'
-import { UsersLoader } from '~/modules/Auth/loaders/user'
+import { findUserById } from '~/modules/Auth/loaders/user'
 
 @ObjectType()
 @Entity()
@@ -49,10 +49,8 @@ export class Page extends BaseEntity {
   userConnection: User
 
   @Field(() => User, { complexity: 5 })
-  async user(): Promise<User> {
-    const user = await UsersLoader.load(this.userId)
-
-    return user
+  user(): Promise<User> {
+    return findUserById(this.userId)
   }
 
   @BeforeInsert()
