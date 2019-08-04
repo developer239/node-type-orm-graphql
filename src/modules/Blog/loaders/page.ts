@@ -15,4 +15,4 @@ export const findPagesByUserIds = async (userIds: number[]) => {
   return R.map(R.propOr([], R.__, groupedPages))(userIds)
 }
 
-export const FindPagesByUserIdsLoader = new DataLoader(findPagesByUserIds)
+export const PagesByUserIdsLoader = new DataLoader(findPagesByUserIds)
