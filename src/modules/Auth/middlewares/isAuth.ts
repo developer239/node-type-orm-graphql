@@ -1,7 +1,7 @@
 import { MiddlewareFn } from 'type-graphql'
 import { IAppContext } from '~/types'
 import { crypto } from '~/modules/Auth/services/crypto'
-import { User } from '~/modules/Auth/entities/User'
+import { findById } from '~/modules/Auth/loaders/user'
 
 export const isAuth: MiddlewareFn<IAppContext> = async ({ context }, next) => {
   if (!context.req.headers.authorization) {
@@ -17,7 +17,8 @@ export const isAuth: MiddlewareFn<IAppContext> = async ({ context }, next) => {
   }
 
   const userId = parseInt(jwtPayload.userId, 10)
-  const user = await User.findOne(userId)
+  const user = await findById(userId)
+
   if (!user) {
     throw Error('invalid credentials')
   }
