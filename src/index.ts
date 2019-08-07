@@ -3,6 +3,7 @@ import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import { ExpressContext } from 'apollo-server-express/src/ApolloServer'
 import * as bodyParser from 'body-parser'
+import cors from 'cors'
 import { createSchema } from '~/createSchema'
 import { createConnection } from '~/dbConnection'
 import config from '~/config'
@@ -12,6 +13,7 @@ import { formatError } from '~/modules/Core/errors/formatError'
 
 const app = express()
 
+app.use(cors())
 app.use(bodyParser.json())
 
 const main = async () => {
