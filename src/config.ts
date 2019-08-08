@@ -15,7 +15,7 @@ const pgUrl = parse(process.env.DATABASE_URL)
 const config = {
   server: {
     port: parseInt(process.env.PORT!, 10) || 8080,
-    maxQueryComplexity: 30,
+    maxQueryComplexity: process.env.MAX_QUERY_COMPLEXITY || 9999,
   },
   database: {
     postgres: {
