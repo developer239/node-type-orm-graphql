@@ -6,6 +6,7 @@ import { listResolver } from '~/modules/Core/resolvers/listResolver'
 import { updateResolver } from '~/modules/Core/resolvers/updateResolver'
 import { UpdatePageInput } from '~/modules/Blog/inputs/UpdatePage'
 import { deleteResolver } from '~/modules/Core/resolvers/deleteResolver'
+import { detailResolver } from '~/modules/Core/resolvers/detailResolver'
 
 export const createPageResolver = createResolver<typeof CreatePageInput>(Page, CreatePageInput, [
   isAuth,
@@ -18,3 +19,5 @@ export const updatePageResolver = updateResolver<typeof UpdatePageInput>(Page, U
 export const deletePageResolver = deleteResolver(Page, [isAuth])
 
 export const listPagesResolver = listResolver(Page)
+
+export const pageDetailResolver = detailResolver(Page)
