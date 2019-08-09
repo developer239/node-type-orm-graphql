@@ -12,7 +12,7 @@ export const pagesByUserIds = async (userIds: number[]) => {
   const groupedPages = R.groupBy(R.prop('userId'))(pages)
 
   // @ts-ignore
-  return R.map(R.propOr([], R.__, groupedPages))(userIds)
+  return R.map((userId: string) => groupedPages[userId] || [])(userIds)
 }
 
 export const PagesByUserIdsLoader = new DataLoader(pagesByUserIds)
