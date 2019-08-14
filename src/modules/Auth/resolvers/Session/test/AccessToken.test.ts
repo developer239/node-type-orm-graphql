@@ -2,12 +2,12 @@ import { createRefreshToken, createUser } from '~/modules/Auth/fixtures'
 import { gCall } from '~/test-utils/gCall'
 
 const accessTokenQuery = `
-  query AccessToken($userId: Float!, $refreshToken: String!) {
-    accessToken(userId: $userId, refreshToken: $refreshToken)
+  query AccessToken($refreshToken: String!) {
+    accessToken(refreshToken: $refreshToken)
   }
 `
 
-const requestAccessToken = (data: { userId: number; refreshToken: string }) =>
+const requestAccessToken = (data: { refreshToken: string }) =>
   gCall({
     source: accessTokenQuery,
     variableValues: {
@@ -17,7 +17,7 @@ const requestAccessToken = (data: { userId: number; refreshToken: string }) =>
 
 describe('[resolver] AccessToken', () => {
   it('should handle invalid refresh token', async () => {
-    const response = await requestAccessToken({ refreshToken: 'invalidToken', userId: 99 })
+    const response = await requestAccessToken({ refreshToken: 'invalidToken' })
 
     expect(response.errors).toBeTruthy()
     expect(response.data).toBeNull()
@@ -32,7 +32,6 @@ describe('[resolver] AccessToken', () => {
 
     const response = await requestAccessToken({
       refreshToken: refreshToken.token,
-      userId: user.id,
     })
 
     expect(response.errors).toBeUndefined()

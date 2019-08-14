@@ -7,11 +7,8 @@ import { invalidTokenError } from '~/modules/Core/errors'
 @Resolver()
 export class AccessTokenResolver {
   @Query(() => String)
-  async accessToken(
-    @Arg('refreshToken') refreshToken: string,
-    @Arg('userId') userId: number
-  ): Promise<User> {
-    const whereCondition = { token: refreshToken, user: { id: userId } }
+  async accessToken(@Arg('refreshToken') refreshToken: string): Promise<User> {
+    const whereCondition = { token: refreshToken }
     const token = await RefreshToken.findOne(whereCondition, { relations: ['user'] })
 
     if (!token) {
