@@ -33,7 +33,7 @@ const config = {
     accessTokenSecret: process.env.AUTH_SECRET || 'developmentAuthSecret',
     refreshTokenSecret: process.env.AUTH_SECRET || 'developmentAuthSecret',
     createOptions: {
-      expiresIn: 60 * 60,
+      expiresIn: process.env.AUTH_TOKEN_EXPIRATION || 60 * 60,
       algorithm: 'HS256',
       issuer: `jwt-issuer`,
     },
